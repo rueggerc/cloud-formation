@@ -1,0 +1,17 @@
+# Create Stack
+aws cloudformation create-stack --stack-name MyNetwork --template-body file://vpc1.yml
+
+# Create Stack and wait
+aws cloudformation wait create-stack --stack-name MyNetwork --template-body file://vpc1.yml
+
+# Examine Stack
+aws cloudformation describe-stack 
+
+# Update Stack
+aws cloudformation update-stack --stack-name MyNetwork --template-body file://vpc1.yml
+
+# Update Stack and wait
+aws cloudformation wait update-stack--stack-name MyNetwork --template-body file://vpc1.yml
+
+#Delete Stack
+aws cloudformation delete-stack --stack-name MyNetwork
