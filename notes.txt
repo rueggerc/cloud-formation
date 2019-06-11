@@ -1,8 +1,8 @@
 # Create Stack
 aws cloudformation create-stack --stack-name MyNetwork --template-body file://vpc1.yml
 
-# Create Stack and wait
-aws cloudformation wait create-stack --stack-name MyNetwork --template-body file://vpc1.yml
+# Wait for stack creation to complete
+aws cloudformation wait stack-create-complete --stack-name MyNetwork
 
 # Examine Stack
 aws cloudformation describe-stack 
