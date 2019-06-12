@@ -207,8 +207,8 @@ Resources:
       Egress: false
       CidrBlock: 0.0.0.0/0
       PortRange:
-        From: 2345
-        To: 2345
+        From: 5432
+        To: 5432
   OutboundAllPrivateNetworkAclEntry:
     Type: "AWS::EC2::NetworkAclEntry"
     Properties:
@@ -218,3 +218,38 @@ Resources:
       RuleAction: allow
       Egress: true
       CidrBlock: 0.0.0.0/0
+  PublicSubnetSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: "PublicSubnetSG"
+      GroupName: "PublicSubnetSG"
+      SecurityGroupIngress:
+          - IpProtocol: tcp
+            CidrIp: 0.0.0.0/0
+            FromPort: 22
+            ToPort: 22
+          - IpProtocol: tcp
+            CidrIp: 0.0.0.0/0
+            FromPort: 80
+            ToPort: 80
+          - IpProtocol: tcp
+            CidrIp: 0.0.0.0/0
+            FromPort: 443
+            ToPort: 443
+      VpcId: !Ref VPC
+  PrivateSubnetSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: "PrivateSubnetSG"
+      GroupName: "PrivateSubnetSG"
+      SecurityGroupIngress:
+          - IpProtocol: tcp
+            CidrIp: 10.0.1.0/24
+            FromPort: 22
+            ToPort: 22
+          - IpProtocol: tcp
+            CidrIp: 10.0.1.0/24
+            FromPort: 5432
+            ToPort: 5432
+      VpcId: !Ref VPC
+  
