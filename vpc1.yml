@@ -8,10 +8,14 @@ Resources:
       EnableDnsHostnames: true
       Tags:
       - Key: Name
-        Value: !Join ['',[!Ref "AWS::StackName", "-VPC"]]
+        Value: !Join ['', [!Ref "AWS::StackName", "-VPC"]]
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     DependsOn: VPC
+    Properties:
+      Tags:
+      - Key: Name
+        Value: !Join ['', [!Ref "AWS::StackName", "-IGW"]]
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
@@ -38,7 +42,7 @@ Resources:
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId:  !Ref VPC
+      VpcId: !Ref VPC
       Tags:
       - Key: Name
         Value: PublicRouteTable
@@ -52,7 +56,7 @@ Resources:
   PrivateRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
-      VpcId:  !Ref VPC
+      VpcId: !Ref VPC
       Tags:
       - Key: Name
         Value: PrivateRouteTable
@@ -61,7 +65,7 @@ Resources:
     Properties:
       RouteTableId: !Ref PrivateRouteTable
       DestinationCidrBlock: 0.0.0.0/0
-      NatGatewayId: NATGateway
+      NatGatewayId: !Ref NATGateway
   NATGateway:
     Type: AWS::EC2::NatGateway
     Properties:

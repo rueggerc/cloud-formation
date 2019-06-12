@@ -5,13 +5,16 @@ aws cloudformation create-stack --stack-name MyNetwork --template-body file://vp
 aws cloudformation wait stack-create-complete --stack-name MyNetwork
 
 # Examine Stack
-aws cloudformation describe-stack 
+aws cloudformation describe-stacks 
 
 # Update Stack
 aws cloudformation update-stack --stack-name MyNetwork --template-body file://vpc1.yml
 
 # Update Stack and wait
-aws cloudformation wait update-stack--stack-name MyNetwork --template-body file://vpc1.yml
+aws cloudformation wait stack-update-complete --stack-name MyNetwork
 
 #Delete Stack
 aws cloudformation delete-stack --stack-name MyNetwork
+
+#Delete Stack
+aws cloudformation wait stack-delete-complete --stack-name MyNetwork
